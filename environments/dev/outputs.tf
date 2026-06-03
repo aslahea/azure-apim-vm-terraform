@@ -22,3 +22,23 @@ output "nsg_id" {
   value       = module.network.nsg_id
   description = "The ID of the network security group"
 }
+
+output "vm_id" {
+  value       = module.vm.vm_id
+  description = "The ID of the virtual machine"
+}
+
+output "vm_name" {
+  value       = module.vm.vm_name
+  description = "The name of the virtual machine"
+}
+
+output "vm_public_ip" {
+  value       = module.vm.public_ip
+  description = "The public IP address of the virtual machine"
+}
+
+output "vm_private_ip" {
+  value       = module.vm.private_ip
+  description = "The private IP address of the virtual machine"
+}
