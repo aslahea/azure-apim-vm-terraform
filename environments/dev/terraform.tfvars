@@ -28,3 +28,8 @@ apim_name       = "apim-dev-aslah"
 publisher_name  = "Aslah"
 publisher_email = "aslahea68@gmail.com"
 sku_name        = "Developer_1"
+
+# cosmosdb variables
+cosmos_account_name   = "cosmos-dev-aslah"
+cosmos_database_name  = "app-db"
+cosmos_container_name = "users"
