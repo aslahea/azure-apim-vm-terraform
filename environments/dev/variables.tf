@@ -86,3 +86,21 @@ variable "sku_name" {
   type        = string
   description = "Name of the sku"
 }
+
+# cosmosdb variables
+variable "cosmos_account_name" {
+  type        = string
+  description = "Name of the Cosmos DB account"
+}
+
+variable "cosmos_database_name" {
+  type        = string
+  description = "Name of the Cosmos DB database"
+  default     = "app-db"
+}
+
+variable "cosmos_container_name" {
+  type        = string
+  description = "Name of the Cosmos DB container"
+  default     = "users"
+}

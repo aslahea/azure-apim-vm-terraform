@@ -27,7 +27,17 @@ variable "sku_name"{
   description = "Name of the sku"
 }
 
-variable "tags"{
+variable "tags" {
   type        = map(string)
   description = "Tags to be applied to the resource group"
+}
+
+variable "subnet_id" {
+  type        = string
+  description = "The ID of the subnet"
+}
+
+variable "vm_public_ip" {
+  type        = string
+  description = "The public IP address of the backend VM"
 }

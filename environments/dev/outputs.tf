@@ -34,7 +34,7 @@ output "vm_id" {
 output "vm_name" {
   value       = module.vm.vm_name
   description = "The name of the virtual machine"
-}
+}   
 
 output "vm_public_ip" {
   value       = module.vm.public_ip
@@ -56,3 +56,16 @@ output "apim_gateway_url" {
   value       = module.apim.apim_gateway_url
   description = "The Gateway URL of the API Management service"
 }
+
+# cosmosdb outputs
+output "cosmosdb_endpoint" {
+  value       = module.cosmosdb.cosmosdb_endpoint
+  description = "The endpoint of the Cosmos DB account"
+}
+
+output "cosmosdb_primary_key" {
+  value       = module.cosmosdb.cosmosdb_primary_key
+  sensitive   = true
+  description = "The primary key of the Cosmos DB account"
+}
+

@@ -42,4 +42,16 @@ module "apim" {
   publisher_email     = var.publisher_email
   sku_name            = var.sku_name
   tags                = var.tags
+  subnet_id           = module.network.subnet_id
+  vm_public_ip        = module.vm.public_ip
+}
+
+module "cosmosdb" {
+  source              = "../../modules/cosmosdb"
+  resource_group_name = module.resource_group.rg_name
+  location            = var.location
+  cosmos_account_name = var.cosmos_account_name
+  database_name       = var.cosmos_database_name
+  container_name      = var.cosmos_container_name
+  tags                = var.tags
 }
