@@ -22,3 +22,9 @@ admin_username = "aslah"
 nic_name       = "nic-apim-dev"
 public_ip_name = "pip-apim-dev"
 public_key     = "~/.ssh/id_rsa.pub"
+
+# apim variables
+apim_name       = "apim-dev-aslah"
+publisher_name  = "Aslah"
+publisher_email = "aslahea68@gmail.com"
+sku_name        = "Developer_1"
