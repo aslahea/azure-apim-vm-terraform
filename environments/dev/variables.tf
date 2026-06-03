@@ -65,3 +65,24 @@ variable "public_ip_name" {
   type        = string
   description = "Name of the public IP address"
 }
+
+# apim variables
+variable "apim_name" {
+  type        = string
+  description = "Name of the API management"
+}
+
+variable "publisher_name" {
+  type        = string
+  description = "Name of the publisher"
+}
+
+variable "publisher_email" {
+  type        = string
+  description = "Email of the publisher"
+}
+
+variable "sku_name" {
+  type        = string
+  description = "Name of the sku"
+}
