@@ -6,19 +6,30 @@ An enterprise-grade, modular Terraform architecture on Azure. This project provi
 
 ## 1. System Architecture
 
-The following diagram illustrates the secure request flow and resource grouping:
+The following diagram illustrates the secure request flow, network security rules, and resource grouping:
 
 ```mermaid
 graph TD
-    Client([External Client]) -->|HTTPS Requests| APIM[Azure API Management Gateway]
-    subgraph VNet [Virtual Network]
-        subgraph Subnet [Isolated Subnet]
-            VM[Linux VM]
+    Client([External Client]) -->|HTTPS: Port 443| APIM[Azure API Management Gateway]
+    Admin([Developer / Admin]) -->|SSH: Port 22| NSG{Network Security Group}
+
+    subgraph RG [Resource Group: azure-apim-vm-terraform]
+        APIM -->|Routes HTTP: Port 5000| NSG
+        
+        subgraph VNet [Virtual Network: vnet-apim-dev]
+            subgraph Subnet [Isolated Subnet: subnet-apim-dev]
+                NSG -->|Allow Port 22| VM[Linux VM: vm-apim-dev]
+                NSG -->|Allow Port 5000| VM
+                
+                subgraph VM_Compute [VM Compute Layer]
+                    VM -->|Hosts| Flask[Python Flask API]
+                end
+            end
         end
+
+        Cosmos[Cosmos DB Account]
+        Flask -->|Azure SDK| Cosmos
     end
-    APIM -->|Routes HTTP Traffic via Port 5000| VM
-    VM -->|Runs Flask App| App[Flask API]
-    App -->|Reads/Writes Data via Azure SDK| Cosmos[Cosmos DB Account]
 ```
 
 ---
@@ -35,15 +46,20 @@ graph TD
 │       ├── outputs.tf        # Combined environment-level outputs
 │       ├── terraform.tfvars  # Deployment variable values
 │       ├── variables.tf      # Root-level variable definitions
-│       └── provider.tf       # AzureRM provider configuration
+│       ├── provider.tf       # AzureRM provider configuration
+│       ├── backend.tf        # Local backend state path configuration
+│       └── versions.tf       # Required provider & Terraform versions
 ├── modules/
 │   ├── resource-group/       # Resource group module
 │   ├── network/              # Virtual network, subnet & NSG module
 │   ├── vm/                   # Linux Virtual Machine module (SSH authenticated)
 │   ├── apim/                 # API Management setup (API, operations, and rate-limiting)
 │   └── cosmosdb/             # Serverless Cosmos DB SQL account, database, and container
-└── scripts/
-    └── install_api.sh        # Automation script to prepare the Flask VM environment
+├── scripts/
+│   └── install_api.sh        # Automation script to prepare the Flask VM environment
+└── tfstate/
+    ├── dev.tfstate           # Local Terraform state file
+    └── dev.tfstate.backup    # Terraform state backup file
 ```
 
 ---
