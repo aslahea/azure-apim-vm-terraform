@@ -97,23 +97,41 @@ terraform output -raw cosmosdb_primary_key
 ```
 
 ### Step 3: Deploy and Run the Flask App on the VM
-1. SSH into your newly created VM:
+
+1. **Copy the application code and installation script to the VM:**
+   From the project root on your local machine, run:
    ```bash
-   ssh aslah@<VM_PUBLIC_IP>
+   scp -r app/ scripts/install_api.sh <ADMIN_USERNAME>@<VM_PUBLIC_IP>:/home/<ADMIN_USERNAME>/
    ```
-2. Place the code from the `app/` folder into your VM directory (e.g. `app.py` and `requirements.txt`).
-3. Set the Cosmos DB environment variables on the VM:
+   *(Replace `<ADMIN_USERNAME>` with your VM admin username, e.g., `aslah`, and `<VM_PUBLIC_IP>` with the public IP from Step 2).*
+
+2. **SSH into your VM:**
+   ```bash
+   ssh <ADMIN_USERNAME>@<VM_PUBLIC_IP>
+   ```
+
+3. **Install dependencies on the VM:**
+   ```bash
+   chmod +x install_api.sh
+   ./install_api.sh
+   ```
+
+4. **Set the Cosmos DB environment variables on the VM:**
    ```bash
    export COSMOS_ENDPOINT="<COSMOS_DB_ENDPOINT>"
    export COSMOS_KEY="<COSMOS_DB_PRIMARY_KEY>"
    ```
-4. Run the setup script to install dependencies:
+
+5. **Start the application:**
+   To run in the background (recommended):
    ```bash
-   ./scripts/install_api.sh
+   source venv/bin/activate
+   nohup python app/app.py > flask.log 2>&1 &
    ```
-5. Start the application:
+   Or to run in the foreground:
    ```bash
-   python3 app.py
+   source venv/bin/activate
+   python app/app.py
    ```
 
 ---
