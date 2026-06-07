@@ -174,3 +174,10 @@ To delete all resources when finished:
 cd environments/dev
 terraform destroy -auto-approve
 ```
+
+---
+
+## 7. License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
