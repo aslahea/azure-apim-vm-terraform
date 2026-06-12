@@ -6,6 +6,12 @@ resource "azurerm_api_management" "apim" {
   publisher_email     = var.publisher_email
   sku_name            = var.sku_name
   tags                = var.tags
+
+  virtual_network_type = "External"
+
+  virtual_network_configuration {
+    subnet_id = var.subnet_id
+  }
 }
 
 resource "azurerm_api_management_api" "flask_api" {
@@ -16,9 +22,10 @@ resource "azurerm_api_management_api" "flask_api" {
   display_name          = "Flask API"
   path                  = "flask"
   protocols             = ["http", "https"]
-  service_url           = "http://${var.vm_public_ip}:5000"
+  service_url           = "http://${var.vm_private_ip}:5000"
   subscription_required = false
 }
+
 
 resource "azurerm_api_management_api_operation" "get_health" {
   operation_id        = "get-health"

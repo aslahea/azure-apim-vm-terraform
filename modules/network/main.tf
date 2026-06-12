@@ -15,6 +15,15 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = var.subnet_address_prefixes
 }
 
+# Define a dedicated Subnet for APIM
+resource "azurerm_subnet" "apim_subnet" {
+  name                 = var.apim_subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = var.apim_subnet_address_prefixes
+}
+
+
 # 3. Define Network Security Group (NSG)
 resource "azurerm_network_security_group" "nsg" {
   name                = var.nsg_name

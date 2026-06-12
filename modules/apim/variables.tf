@@ -37,7 +37,7 @@ variable "subnet_id" {
   description = "The ID of the subnet"
 }
 
-variable "vm_public_ip" {
+variable "vm_private_ip" {
   type        = string
   description = "The public IP address of the backend VM"
 }
