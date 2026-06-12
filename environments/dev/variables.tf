@@ -40,6 +40,17 @@ variable "subnet_address_prefixes" {
   description = "Address prefixes of the subnet"
 }
 
+variable "apim_subnet_name" {
+  type        = string
+  description = "Name of the APIM subnet"
+}
+
+variable "apim_subnet_address_prefixes" {
+  type        = list(string)
+  description = "Address prefixes of the APIM subnet"
+}
+
+
 # vm variables
 variable "vm_name" {
   type        = string

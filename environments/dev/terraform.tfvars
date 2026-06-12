@@ -14,6 +14,9 @@ vnet_address_space      = ["10.0.0.0/16"]
 subnet_name             = "subnet-app-dev"
 subnet_address_prefixes = ["10.0.1.0/24"]
 nsg_name                = "nsg-apim-dev"
+apim_subnet_name             = "subnet-apim-dev"
+apim_subnet_address_prefixes = ["10.0.2.0/24"]
+
 
 # vm variables
 vm_name        = "vm-apim-dev"

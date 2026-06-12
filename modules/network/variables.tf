@@ -37,3 +37,13 @@ variable "tags" {
   type        = map(string)
   description = "Tags to be applied to the resources"
 }
+
+variable "apim_subnet_name" {
+  type        = string
+  description = "Name of the APIM subnet"
+}
+
+variable "apim_subnet_address_prefixes" {
+  type        = list(string)
+  description = "Address prefixes of the APIM subnet"
+}

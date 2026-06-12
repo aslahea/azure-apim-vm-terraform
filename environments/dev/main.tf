@@ -15,6 +15,8 @@ module "network" {
   subnet_address_prefixes = var.subnet_address_prefixes
   nsg_name                = var.nsg_name
   tags                    = var.tags
+  apim_subnet_name             = var.apim_subnet_name
+  apim_subnet_address_prefixes = var.apim_subnet_address_prefixes
 }
 
 module "vm" {
@@ -42,9 +44,10 @@ module "apim" {
   publisher_email     = var.publisher_email
   sku_name            = var.sku_name
   tags                = var.tags
-  subnet_id           = module.network.subnet_id
-  vm_public_ip        = module.vm.public_ip
+  subnet_id           = module.network.apim_subnet_id
+  vm_private_ip       = module.vm.private_ip
 }
+
 
 module "cosmosdb" {
   source              = "../../modules/cosmosdb"
